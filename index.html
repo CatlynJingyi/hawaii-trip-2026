@@ -48,6 +48,71 @@
         @media (max-width: 900px) {
             .island-content { grid-template-columns: 1fr; }
         }
+        @media (max-width: 768px) {
+            .header { padding: 14px 16px; }
+            .header h1 { font-size: 20px; }
+            .container { padding: 10px; }
+            .island-section { border-radius: 8px; margin-bottom: 16px; }
+            .island-title { font-size: 16px; padding: 12px 16px; }
+            .island-content {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+            }
+            .map-container {
+                height: calc(100vh - 280px) !important;
+                min-height: 320px;
+                max-height: 480px;
+            }
+            #oahu-map, #bigisland-map {
+                height: calc(100vh - 280px) !important;
+                min-height: 320px;
+                max-height: 480px;
+            }
+            .itinerary-panel {
+                max-height: none !important;
+                padding: 0 0 12px 0;
+                overflow-x: auto;
+                overflow-y: hidden;
+                display: flex;
+                flex-direction: row;
+                gap: 12px;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .itinerary-panel::-webkit-scrollbar { display: none; }
+            .itinerary-panel .day-card {
+                flex: 0 0 85vw;
+                max-width: 85vw;
+                scroll-snap-align: center;
+                margin-bottom: 0;
+                border-radius: 12px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            }
+            .itinerary-panel .day-card:first-child { margin-left: 7.5vw; }
+            .itinerary-panel .day-card:last-child { margin-right: 7.5vw; }
+            .itinerary-panel .day-card .day-body {
+                display: block !important;
+                max-height: 180px;
+                overflow-y: auto;
+                font-size: 12px;
+            }
+            .legend { display: none; }
+            .tips { font-size: 12px; padding: 12px 14px; }
+            section { margin: 0 0 12px !important; padding: 14px 12px !important; font-size: 12px !important; }
+            section h2 { font-size: 15px !important; }
+            .mobile-swipe-hint {
+                display: block;
+                text-align: center;
+                font-size: 11px;
+                color: #64748b;
+                padding: 6px 0 2px;
+            }
+        }
+        @media (min-width: 769px) {
+            .mobile-swipe-hint { display: none; }
+        }
 
         .map-container {
             height: 500px;
@@ -179,10 +244,6 @@
             white-space: nowrap;
         }
         .route-arrow { background: transparent; border: 0; }
-        @media (max-width: 900px) {
-            #oahu-map, #bigisland-map { height: 560px; }
-            #oahu-map + .itinerary-panel, #bigisland-map + .itinerary-panel { max-height: none; }
-        }
     </style>
 </head>
 <body>
@@ -653,6 +714,12 @@
         let markers = [];
         let polylines = [];
 
+        // Add mobile swipe hint
+        const hint = document.createElement('div');
+        hint.className = 'mobile-swipe-hint';
+        hint.textContent = '← 左右滑动切换每日行程 →';
+        panel.parentNode.insertBefore(hint, panel);
+
         // Render day cards
         days.forEach((day, idx) => {
             const card = document.createElement('div');
@@ -667,7 +734,7 @@
                         <div class="stop-item">
                             <span class="stop-number">${i + 1}</span>
                             <div class="stop-text">
-                                <div class="stop-name">${stop.name}</div>
+                                <div class="stop-name">${stop.name}${stop.nameCn ? ' <small style="color:#64748b;">' + stop.nameCn + '</small>' : ''}</div>
                                 <div class="stop-desc">${stop.desc}</div>
                             </div>
                         </div>
@@ -680,6 +747,30 @@
                 showDay(idx, days, map, markers, polylines);
             });
             panel.appendChild(card);
+        });
+
+        // Mobile: switch day on scroll-snap
+        let scrollTimeout;
+        panel.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const cards = panel.querySelectorAll('.day-card');
+                const panelRect = panel.getBoundingClientRect();
+                const panelCenter = panelRect.left + panelRect.width / 2;
+                let closestIdx = 0, closestDist = Infinity;
+                cards.forEach((card, idx) => {
+                    const cardRect = card.getBoundingClientRect();
+                    const cardCenter = cardRect.left + cardRect.width / 2;
+                    const dist = Math.abs(cardCenter - panelCenter);
+                    if (dist < closestDist) { closestDist = dist; closestIdx = idx; }
+                });
+                const currentActive = panel.querySelector('.day-card.active');
+                if (currentActive !== cards[closestIdx]) {
+                    cards.forEach(c => c.classList.remove('active'));
+                    cards[closestIdx].classList.add('active');
+                    showDay(closestIdx, days, map, markers, polylines);
+                }
+            }, 120);
         });
 
         // Render legend
