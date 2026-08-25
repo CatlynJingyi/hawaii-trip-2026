@@ -18,6 +18,29 @@
         }
         .header h1 { font-size: 28px; margin-bottom: 8px; }
         .header p { font-size: 14px; opacity: 0.9; }
+        .island-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+        .tab-btn {
+            padding: 8px 18px;
+            border: 2px solid rgba(255,255,255,0.6);
+            border-radius: 20px;
+            background: transparent;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { background: rgba(255,255,255,0.15); }
+        .tab-btn.active {
+            background: white;
+            color: #0077b6;
+            border-color: white;
+        }
 
         .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
 
@@ -249,12 +272,16 @@
 <body>
     <div class="header">
         <h1>🌺 Hawaii Trip Planner</h1>
-        <p>Sep 27 (Sat) - Oct 6 (Mon), 2026 | Oahu + Big Island</p>
+        <p>Sep 27 (Sun) – Oct 6 (Tue), 2026</p>
+        <div class="island-tabs">
+            <button class="tab-btn active" data-island="oahu">🏝️ Oahu 欧胡岛</button>
+            <button class="tab-btn" data-island="bigisland">🌋 Big Island 大岛</button>
+        </div>
     </div>
 
     <div class="container">
         <!-- Oahu Section -->
-        <div class="island-section">
+        <div class="island-section island-page" id="page-oahu">
             <div class="island-title">🏝️ Oahu (欧胡岛) — Sep 27 ~ Oct 1</div>
             <div class="island-content">
                 <div class="map-container" id="oahu-map"></div>
@@ -266,7 +293,7 @@
         </div>
 
         <!-- Big Island Section -->
-        <div class="island-section">
+        <div class="island-section island-page" id="page-bigisland" style="display:none;">
             <div class="island-title big-island">🌋 Big Island (大岛) — Oct 1 ~ Oct 6</div>
             <div class="island-content">
                 <div class="map-container" id="bigisland-map"></div>
@@ -277,7 +304,7 @@
             <div class="legend" id="bigisland-legend"></div>
         </div>
 
-        <div class="tips">
+        <div class="tips island-page" id="tips-oahu">
             <h3>💡 行程小贴士</h3>
             <ul style="padding-left: 16px;">
                 <li>欧胡岛建议租车，北岸一日游开车约1.5-2小时单程</li>
@@ -985,6 +1012,35 @@
         // Big Island map
         const bigIslandMap = initMap('bigisland-map', [19.6000, -155.5000], 9);
         renderItinerary('bigisland-itinerary', 'bigisland-legend', bigIslandDays, bigIslandMap);
+
+        // Island tab switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const oahuPage = document.getElementById('page-oahu');
+        const bigIslandPage = document.getElementById('page-bigisland');
+        const tipsOahu = document.getElementById('tips-oahu');
+        // Oahu briefing section is inserted after oahuPage dynamically
+        function switchIsland(island) {
+            tabBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.island === island));
+            const oahuSections = [oahuPage, tipsOahu];
+            const oahuBriefing = oahuPage.nextElementSibling?.tagName === 'SECTION' ? oahuPage.nextElementSibling : null;
+            const bigIslandBriefing = bigIslandPage.nextElementSibling?.tagName === 'SECTION' ? bigIslandPage.nextElementSibling : null;
+            if (island === 'oahu') {
+                oahuPage.style.display = '';
+                if (oahuBriefing) oahuBriefing.style.display = '';
+                if (tipsOahu) tipsOahu.style.display = '';
+                bigIslandPage.style.display = 'none';
+                if (bigIslandBriefing) bigIslandBriefing.style.display = 'none';
+                setTimeout(() => oahuMap.invalidateSize(), 100);
+            } else {
+                oahuPage.style.display = 'none';
+                if (oahuBriefing) oahuBriefing.style.display = 'none';
+                if (tipsOahu) tipsOahu.style.display = 'none';
+                bigIslandPage.style.display = '';
+                if (bigIslandBriefing) bigIslandBriefing.style.display = '';
+                setTimeout(() => bigIslandMap.invalidateSize(), 100);
+            }
+        }
+        tabBtns.forEach(btn => btn.addEventListener('click', () => switchIsland(btn.dataset.island)));
     });
     </script>
 </body>
