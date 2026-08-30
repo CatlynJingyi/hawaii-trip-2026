@@ -267,6 +267,121 @@
             white-space: nowrap;
         }
         .route-arrow { background: transparent; border: 0; }
+
+        /* Weather guide */
+        .weather-page {
+            background: #f8fafc;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .weather-hero {
+            padding: 24px;
+            color: white;
+            background: linear-gradient(135deg, #0369a1, #0891b2 55%, #0d9488);
+        }
+        .weather-hero h2 { font-size: 23px; margin-bottom: 8px; }
+        .weather-hero p { font-size: 13px; line-height: 1.65; opacity: 0.96; }
+        .weather-content { padding: 22px; }
+        .weather-notice {
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            border: 1px solid #fbbf24;
+            border-radius: 10px;
+            background: #fffbeb;
+            color: #78350f;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+        .weather-summary-grid,
+        .weather-days,
+        .packing-grid,
+        .weather-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px;
+        }
+        .weather-summary-grid { margin-bottom: 24px; }
+        .weather-summary {
+            padding: 14px;
+            border: 1px solid #bae6fd;
+            border-radius: 10px;
+            background: white;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+        .weather-section-title {
+            margin: 25px 0 13px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #bae6fd;
+            color: #0c4a6e;
+            font-size: 19px;
+        }
+        .weather-day-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 225px;
+            overflow: hidden;
+            border: 1px solid #dbeafe;
+            border-radius: 11px;
+            background: white;
+            box-shadow: 0 2px 7px rgba(15,23,42,0.06);
+        }
+        .weather-day-head {
+            padding: 11px 13px;
+            background: linear-gradient(135deg, #e0f2fe, #ecfeff);
+            color: #075985;
+            font-size: 14px;
+            font-weight: 750;
+        }
+        .weather-day-body { padding: 13px; font-size: 12.5px; line-height: 1.62; }
+        .weather-day-body p + p { margin-top: 8px; }
+        .weather-temp { color: #c2410c; font-weight: 700; }
+        .packing-card {
+            padding: 15px;
+            border: 1px solid #d1fae5;
+            border-radius: 10px;
+            background: white;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .packing-card h4 { margin-bottom: 6px; color: #047857; font-size: 14px; }
+        .packing-card ul, .weather-reminders ul { padding-left: 18px; }
+        .weather-reminders {
+            margin-top: 18px;
+            padding: 16px;
+            border: 1px solid #fecaca;
+            border-radius: 10px;
+            background: #fff7ed;
+            color: #7c2d12;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .weather-link-card {
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            background: white;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+        .weather-link-card a { color: #0369a1; font-weight: 650; }
+        .weather-footer-note { margin-top: 18px; color: #64748b; font-size: 11px; line-height: 1.55; }
+
+        @media (max-width: 768px) {
+            .island-tabs { gap: 5px; }
+            .tab-btn { padding: 7px 11px; font-size: 12px; }
+            .weather-page { border-radius: 8px; }
+            .weather-hero { padding: 17px 15px; }
+            .weather-hero h2 { font-size: 18px; }
+            .weather-content { padding: 12px; }
+            .weather-summary-grid,
+            .weather-days,
+            .packing-grid,
+            .weather-links { grid-template-columns: 1fr; gap: 10px; }
+            .weather-section-title { margin-top: 21px; font-size: 17px; }
+            .weather-day-card { min-height: auto; }
+        }
     </style>
 </head>
 <body>
@@ -276,6 +391,7 @@
         <div class="island-tabs">
             <button class="tab-btn active" data-island="oahu">🏝️ Oahu 欧胡岛</button>
             <button class="tab-btn" data-island="bigisland">🌋 Big Island 大岛</button>
+            <button class="tab-btn" data-island="weather">🌤️ 天气指南</button>
         </div>
     </div>
 
@@ -313,6 +429,153 @@
                 <li>大岛必去：Volcanoes National Park, Mauna Kea 观星, 黑沙滩</li>
                 <li>大岛很大，建议分区游览（Hilo 侧 vs Kona 侧）</li>
             </ul>
+        </div>
+
+        <!-- Weather & clothing guide: seasonal planning, not a long-range daily forecast -->
+        <div class="weather-page island-page" id="page-weather" style="display:none;">
+            <div class="weather-hero">
+                <h2>🌤️ 天气预判 & 穿衣指南</h2>
+                <p>Oʻahu 9/27–10/1 · Big Island 10/1–10/6<br>按每天路线的海岸、迎风面与高海拔微气候准备，出发前请按下方时间节点更新实时预报。</p>
+            </div>
+            <div class="weather-content">
+                <div class="weather-notice">
+                    <strong>⚠️ 目前是季节趋势版，不是精确逐日预报。</strong><br>
+                    超过10天的天气无法可靠预测。建议在 <strong>9/20左右</strong> 更新第一版逐日预报；浮潜、出海、火山和观星活动前 <strong>24–48小时</strong> 再确认小时天气、风浪和官方警报。
+                </div>
+
+                <div class="weather-summary-grid">
+                    <div class="weather-summary"><strong>🏖️ 海边白天</strong><br>约 28–31°C，日晒强、体感偏湿；海水约 26–27°C。</div>
+                    <div class="weather-summary"><strong>🌧️ 迎风面 / Hilo</strong><br>短阵雨较常见，通常来得快、去得快；轻量防水外套比雨伞实用。</div>
+                    <div class="weather-summary"><strong>🌋 火山公园</strong><br>约 14–23°C，晴、雾、阵雨和强风可能在同一天快速切换。</div>
+                    <div class="weather-summary"><strong>⭐ Maunakea VIS</strong><br>日落后约 4–10°C；强风时体感可能接近 0°C，必须准备冬季保暖层。</div>
+                </div>
+
+                <h3 class="weather-section-title">🏝️ Oʻahu 欧胡岛逐日指南</h3>
+                <div class="weather-days">
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">9/27 · Waikīkī 抵达日</div>
+                        <div class="weather-day-body">
+                            <p>🌤️ <span class="weather-temp">25–31°C</span>；晴到多云，午后可能有短阵雨，海边日晒明显。</p>
+                            <p>👕 短袖、短裤或薄裙、凉鞋；飞机和室内冷气环境可穿薄长裤，随身带薄防晒外套。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">9/28 · Hoʻomaluhia → Kualoa → Kailua</div>
+                        <div class="weather-day-body">
+                            <p>🌦️ <span class="weather-temp">24–29°C</span>；迎风东岸云量较多，植物园和牧场可能有短阵雨、湿地或泥泞。</p>
+                            <p>👕 速干短袖＋运动短裤/薄长裤；E-bike 穿包头包跟鞋；带轻薄防水外套和备用上衣，避免白鞋。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">9/29 · 鲨鱼笼潜＋北岸环岛</div>
+                        <div class="weather-day-body">
+                            <p>🌊 <span class="weather-temp">24–30°C</span>；清晨船上风大，体感约 21–24°C；9月底北岸可能开始出现涌浪。</p>
+                            <p>👕 提前穿泳衣，外搭速干衣；带防风外套、毛巾和全套干衣。易晕船者按说明提前服用防晕药。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">9/30 · 恐龙湾＋东南海岸＋钻石山</div>
+                        <div class="weather-day-body">
+                            <p>☀️ <span class="weather-temp">25–31°C</span>；东南海岸日晒和风都较强，15:00攀登钻石山仍可能很热。</p>
+                            <p>👕 泳衣＋UPF水母衣；午餐后换干燥运动装和防滑鞋。帽子、太阳镜，每人至少准备 1–1.5L 水。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">10/1 · Waikīkī → HNL → KOA</div>
+                        <div class="weather-day-body">
+                            <p>🌤️ <span class="weather-temp">25–31°C</span>；Honolulu 与 Kona 均偏暖，局部短阵雨通常持续不久。</p>
+                            <p>👕 轻便短袖＋薄长裤，薄外套应对机场冷气；泳衣、防晒和一套换洗衣放随身行李。</p>
+                        </div>
+                    </article>
+                </div>
+
+                <h3 class="weather-section-title">🌋 Big Island 大岛逐日指南</h3>
+                <div class="weather-days">
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">10/1 · KOA → Kahaluʻu → Aliʻi Drive</div>
+                        <div class="weather-day-body">
+                            <p>☀️ <span class="weather-temp">25–31°C</span>；Kona背风面通常晴到多云，午后山侧可能积云，海水约26–27°C。</p>
+                            <p>👕 泳衣、速干衣、UPF水母衣和涉水鞋；日落后换干衣，薄外套通常足够。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">10/2 · Two Step＋咖啡庄园＋蝠鲼夜潜</div>
+                        <div class="weather-day-body">
+                            <p>🌊 <span class="weather-temp">24–30°C</span>；South Kona通常较干，夜间船上有风，出水后体感约20–23°C。</p>
+                            <p>👕 水母衣＋涉水鞋保护熔岩台阶；夜潜另带毛巾、全套干衣、薄抓绒和防风外套。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">10/3 · Kona → Punaluʻu → 火山地区 → Hilo</div>
+                        <div class="weather-day-body">
+                            <p>🌦️ Kona约25–30°C；Punaluʻu约24–29°C且有风；火山地区 <span class="weather-temp">15–22°C</span>、可能起雾下雨；Hilo湿润。</p>
+                            <p>👕 分层穿搭：短袖＋薄长裤，车内备抓绒和防水外套；进入火山地区换包头鞋。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">10/4 · Hilo瀑布＋Maunakea VIS</div>
+                        <div class="weather-day-body">
+                            <p>🌧️ Hilo <span class="weather-temp">22–28°C</span>，阵雨常见；VIS下午约8–14°C，日落后约4–10°C，强风时体感更低。</p>
+                            <p>👕 白天速干衣＋雨壳；上山换保暖内层、抓绒/轻羽绒、防风外壳、长裤、厚袜和包头鞋，带帽子与薄手套。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">10/5 · 火山国家公园完整日</div>
+                        <div class="weather-day-body">
+                            <p>🌋 <span class="weather-temp">14–23°C</span>；山口天气多变，晴、雾、阵雨和强风可能交替；日落后约10–15°C。</p>
+                            <p>👕 排汗内层＋抓绒＋防水防风外套；薄长裤和抓地运动鞋。若等天黑看红光，增加保暖层并带头灯。</p>
+                        </div>
+                    </article>
+                    <article class="weather-day-card">
+                        <div class="weather-day-head">10/6 · Hilo → Waipiʻo → Waimea → KOA</div>
+                        <div class="weather-day-body">
+                            <p>🌦️ Hilo/Waipiʻo约22–28°C；Waimea海拔较高，约 <span class="weather-temp">17–24°C</span>、多风；Kona恢复炎热干燥。</p>
+                            <p>👕 短袖＋薄长裤，轻防水外套放手边；不要把保暖衣过早塞进行李箱深处。</p>
+                        </div>
+                    </article>
+                </div>
+
+                <h3 class="weather-section-title">🧳 穿衣组合 & 打包清单</h3>
+                <div class="packing-grid">
+                    <div class="packing-card">
+                        <h4>🏊 海滩 / 浮潜日</h4>
+                        <ul><li>☐ 泳衣（建议每人2套）</li><li>☐ UPF 50+ 长袖水母衣</li><li>☐ 速干短裤</li><li>☐ 涉水鞋/防滑凉鞋</li><li>☐ 礁石友好型防晒霜</li><li>☐ 毛巾、干衣和防水湿衣袋</li></ul>
+                    </div>
+                    <div class="packing-card">
+                        <h4>🚗 普通自驾日</h4>
+                        <ul><li>☐ 速干短袖</li><li>☐ 轻薄短裤或长裤</li><li>☐ 舒适运动鞋</li><li>☐ 轻量防水外套放车里</li><li>☐ 帽子、太阳镜</li><li>☐ 水壶与便携电解质</li></ul>
+                    </div>
+                    <div class="packing-card">
+                        <h4>🏔️ 高海拔 / 火山日</h4>
+                        <ul><li>☐ 排汗内层</li><li>☐ 抓绒或可压缩轻羽绒</li><li>☐ 防风防水外层</li><li>☐ 长裤、厚袜</li><li>☐ 包头运动鞋/徒步鞋</li><li>☐ 帽子、薄手套、头灯</li></ul>
+                    </div>
+                    <div class="packing-card">
+                        <h4>✅ 全程随身提醒</h4>
+                        <ul><li>☐ 防晕船药</li><li>☐ 驱蚊液</li><li>☐ 补涂用防晒霜</li><li>☐ 备用充电宝</li><li>☐ 可重复使用水瓶</li><li>☐ 小型急救用品</li></ul>
+                    </div>
+                </div>
+
+                <div class="weather-reminders">
+                    <strong>🚨 活动前必须复查</strong>
+                    <ul>
+                        <li><strong>鲨鱼笼潜（9/29）：</strong>重点查看北岸涌浪和运营商是否确认出航；下雨不一定取消，但强风浪可能取消。</li>
+                        <li><strong>恐龙湾（9/30）：</strong>查看海况与官方开放状态；强水流或水母警报时不要勉强下水。</li>
+                        <li><strong>Two Step / 蝠鲼夜潜（10/2）：</strong>分别确认浪高、入水条件及船方通知；准备出水后的保暖干衣。</li>
+                        <li><strong>Maunakea VIS（10/4）：</strong>上山当天查云量、阵风、道路与游客中心状态；本行程只到VIS，不驾驶2WD继续上山。</li>
+                        <li><strong>火山公园（10/5）：</strong>当天查看喷发、空气质量、火山气体和道路/步道关闭信息，绝不越过封锁线。</li>
+                    </ul>
+                </div>
+
+                <h3 class="weather-section-title">🔗 临近出发时查看</h3>
+                <div class="weather-links">
+                    <div class="weather-link-card"><a href="https://www.weather.gov/hfo/" target="_blank" rel="noopener">NWS Honolulu 天气总览 ↗</a><br>查看各岛分区预报、警报和降雨趋势。</div>
+                    <div class="weather-link-card"><a href="https://www.weather.gov/hfo/marine" target="_blank" rel="noopener">NWS Hawaii 海洋预报 ↗</a><br>重点用于鲨潜、浮潜与蝠鲼夜潜。</div>
+                    <div class="weather-link-card"><a href="https://www.nps.gov/havo/planyourvisit/conditions.htm" target="_blank" rel="noopener">火山国家公园当前状况 ↗</a><br>查看喷发、空气质量、关闭区域与道路状况。</div>
+                    <div class="weather-link-card"><a href="https://mkwc.ifa.hawaii.edu/" target="_blank" rel="noopener">Maunakea Weather Center ↗</a><br>查看高海拔云层、气温、风速和观测条件。</div>
+                </div>
+
+                <p class="weather-footer-note">温度区间为夏威夷9月底至10月初常见趋势，并结合本行程不同海拔与迎风/背风位置整理；不代表对2026年每一天的确定预报。海洋和高海拔天气变化快，请始终以当天官方信息及活动运营商通知为准。</p>
+            </div>
         </div>
     </div>
 
@@ -1020,27 +1283,26 @@
         const oahuPage = document.getElementById('page-oahu');
         const bigIslandPage = document.getElementById('page-bigisland');
         const tipsOahu = document.getElementById('tips-oahu');
+        const weatherPage = document.getElementById('page-weather');
         // Oahu briefing section is inserted after oahuPage dynamically
         function switchIsland(island) {
             tabBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.island === island));
-            const oahuSections = [oahuPage, tipsOahu];
             const oahuBriefing = oahuPage.nextElementSibling?.tagName === 'SECTION' ? oahuPage.nextElementSibling : null;
             const bigIslandBriefing = bigIslandPage.nextElementSibling?.tagName === 'SECTION' ? bigIslandPage.nextElementSibling : null;
-            if (island === 'oahu') {
-                oahuPage.style.display = '';
-                if (oahuBriefing) oahuBriefing.style.display = '';
-                if (tipsOahu) tipsOahu.style.display = '';
-                bigIslandPage.style.display = 'none';
-                if (bigIslandBriefing) bigIslandBriefing.style.display = 'none';
-                setTimeout(() => oahuMap.invalidateSize(), 100);
-            } else {
-                oahuPage.style.display = 'none';
-                if (oahuBriefing) oahuBriefing.style.display = 'none';
-                if (tipsOahu) tipsOahu.style.display = 'none';
-                bigIslandPage.style.display = '';
-                if (bigIslandBriefing) bigIslandBriefing.style.display = '';
-                setTimeout(() => bigIslandMap.invalidateSize(), 100);
-            }
+            const showOahu = island === 'oahu';
+            const showBigIsland = island === 'bigisland';
+            const showWeather = island === 'weather';
+
+            oahuPage.style.display = showOahu ? '' : 'none';
+            if (oahuBriefing) oahuBriefing.style.display = showOahu ? '' : 'none';
+            if (tipsOahu) tipsOahu.style.display = showOahu ? '' : 'none';
+            bigIslandPage.style.display = showBigIsland ? '' : 'none';
+            if (bigIslandBriefing) bigIslandBriefing.style.display = showBigIsland ? '' : 'none';
+            if (weatherPage) weatherPage.style.display = showWeather ? '' : 'none';
+
+            if (showOahu) setTimeout(() => oahuMap.invalidateSize(), 100);
+            if (showBigIsland) setTimeout(() => bigIslandMap.invalidateSize(), 100);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         tabBtns.forEach(btn => btn.addEventListener('click', () => switchIsland(btn.dataset.island)));
     });
