@@ -402,6 +402,134 @@
         }
         .packing-figure img[data-broken="1"] + .img-fallback { display: block; }
 
+        /* Flight info */
+        .flight-page {
+            background: #f8fafc;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .flight-hero {
+            padding: 24px;
+            color: white;
+            background: linear-gradient(135deg, #1e3a8a, #4338ca 55%, #7e22ce);
+        }
+        .flight-hero h2 { font-size: 23px; margin-bottom: 8px; }
+        .flight-hero p { font-size: 13px; line-height: 1.65; opacity: 0.96; }
+        .flight-content { padding: 22px; }
+        .flight-alert {
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            border: 1px solid #f87171;
+            border-radius: 10px;
+            background: #fef2f2;
+            color: #7f1d1d;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .flight-section-title {
+            margin: 25px 0 13px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #c7d2fe;
+            color: #312e81;
+            font-size: 19px;
+        }
+        .flight-section-title:first-child { margin-top: 0; }
+        .group-card {
+            margin-bottom: 16px;
+            border: 1px solid #dbeafe;
+            border-radius: 11px;
+            background: white;
+            box-shadow: 0 2px 7px rgba(15,23,42,0.06);
+            overflow: hidden;
+        }
+        .group-head {
+            padding: 12px 15px;
+            font-size: 15px;
+            font-weight: 750;
+        }
+        .group-head.group-a { background: linear-gradient(135deg, #dbeafe, #eff6ff); color: #1e40af; }
+        .group-head.group-b { background: linear-gradient(135deg, #dcfce7, #f0fdf4); color: #166534; }
+        .group-body { padding: 4px 15px 14px; }
+        .leg {
+            display: grid;
+            grid-template-columns: 74px 1fr;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .leg:last-child { border-bottom: 0; }
+        .leg-no {
+            padding: 5px 0;
+            border-radius: 6px;
+            background: #eef2ff;
+            color: #3730a3;
+            font-size: 12px;
+            font-weight: 750;
+            text-align: center;
+            align-self: start;
+        }
+        .leg-route { font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+        .leg-time { color: #b91c1c; font-weight: 700; }
+        .leg-meta { color: #64748b; font-size: 12px; margin-top: 3px; }
+        .leg-warn { color: #9a3412; font-size: 12px; margin-top: 4px; }
+        .layover-note {
+            margin: 10px 0 2px;
+            padding: 11px 13px;
+            border-left: 4px solid #f59e0b;
+            border-radius: 6px;
+            background: #fffbeb;
+            color: #78350f;
+            font-size: 12.5px;
+            line-height: 1.7;
+        }
+        .meet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        .meet-card {
+            padding: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: white;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .meet-card.recommended { border-color: #34d399; background: #f0fdf4; }
+        .meet-card h4 { margin-bottom: 7px; font-size: 14px; color: #0f172a; }
+        .meet-card ul { padding-left: 17px; }
+        .flight-table-wrap { overflow-x: auto; }
+        table.flight-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 12.5px;
+            min-width: 520px;
+        }
+        table.flight-table th, table.flight-table td {
+            padding: 9px 10px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            line-height: 1.55;
+        }
+        table.flight-table th { background: #eef2ff; color: #312e81; font-weight: 700; }
+        table.flight-table tr.row-a td { background: #f8fbff; }
+        table.flight-table tr.row-b td { background: #f7fdf9; }
+        .flight-footer-note { margin-top: 18px; color: #64748b; font-size: 11px; line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            .flight-page { border-radius: 8px; }
+            .flight-hero { padding: 17px 15px; }
+            .flight-hero h2 { font-size: 18px; }
+            .flight-content { padding: 12px; }
+            .flight-section-title { margin-top: 21px; font-size: 17px; }
+            .meet-grid { grid-template-columns: 1fr; gap: 10px; }
+            .leg { grid-template-columns: 62px 1fr; gap: 9px; }
+        }
+
         @media (max-width: 768px) {
             .island-tabs { gap: 5px; }
             .tab-btn { padding: 7px 11px; font-size: 12px; }
@@ -426,6 +554,7 @@
             <button class="tab-btn active" data-island="oahu">🏝️ Oahu 欧胡岛</button>
             <button class="tab-btn" data-island="bigisland">🌋 Big Island 大岛</button>
             <button class="tab-btn" data-island="weather">🌤️ 天气指南</button>
+            <button class="tab-btn" data-island="flights">✈️ 航班信息</button>
         </div>
     </div>
 
@@ -626,6 +755,190 @@
                 <p class="weather-footer-note">本页温度已于 <strong>9/20</strong> 结合 NWS Honolulu、AccuWeather 等 9 月中旬中期预报更新，并按本行程不同海拔与迎风/背风位置整理；仍不代表对 2026 年每一天的确定预报。海洋和高海拔天气变化快，且当前仍处中太平洋飓风季，请在出发前 24–48 小时以当天官方信息及活动运营商通知为准。</p>
             </div>
         </div>
+
+        <!-- Flight details for the two departure groups, plus the HNL rendezvous plan -->
+        <div class="flight-page island-page" id="page-flights" style="display:none;">
+            <div class="flight-hero">
+                <h2>✈️ 航班信息 & 汇合计划</h2>
+                <p>A 组：上海 → 香港 → 首尔 → 檀香山（9/26 出发，9/27 上午抵达）<br>B 组：达拉斯 → 檀香山（9/27 上午出发，当日抵达）<br>两组均在 <strong>HNL Terminal 2</strong> 到达，全程 4 人合并后一起前往 Waikīkī。</p>
+            </div>
+            <div class="flight-content">
+
+                <div class="flight-alert">
+                    <strong>⚠️ B 组 DFW 航段需要你确认航班号</strong><br>
+                    我核对了 DFW→HNL 的班期：目前<strong>唯一直飞是 AA5，约 11:20（CDT）起飞、约 14:25（HST）抵达</strong>，且 DFW→HNL 最早一班约 09:00 起飞。所以 <strong>9/27 07:00 从 DFW 出发的不可能是直飞</strong>，应该是<strong>经 LAX / PHX 等地中转</strong>的行程。<br>
+                    按常见中转组合推算，HNL 落地大约在 <strong>12:30–14:30（HST）</strong>。请把 B 组的航班号和中转机场发我，我再把精确到达时间、中转时长和汇合时刻写进页面。下面 B 组的到达时间目前按<strong>推算区间</strong>展示。
+                </div>
+
+                <h3 class="flight-section-title">🛫 A 组｜上海出发（3 段）</h3>
+                <div class="group-card">
+                    <div class="group-head group-a">A 组 · 9/26 出发 → 9/27 10:55 抵达 HNL｜全程约 43.5 小时</div>
+                    <div class="group-body">
+                        <div class="leg">
+                            <div class="leg-no">9C8715<br>春秋航空</div>
+                            <div>
+                                <div class="leg-route">上海浦东 PVG · T2 → 香港 HKG · T1</div>
+                                <div><span class="leg-time">9/26 09:15 → 12:20</span>（均为当地时间 UTC+8）</div>
+                                <div class="leg-meta">飞行约 3 小时 05 分 ｜ 建议 07:00 前到浦东 T2（国际航班提前 2 小时以上）</div>
+                            </div>
+                        </div>
+                        <div class="layover-note">
+                            🕓 <strong>香港中转约 5 小时 35 分</strong>（12:20 → 17:55）。春秋与大韩<strong>大概率不联运</strong>：需在 HKG 提取行李、出到达层，再到 T1 大韩航空柜台重新值机托运。时间充裕，但请预留 1 小时办手续，剩余时间可在 T1 用餐休息。
+                        </div>
+                        <div class="leg">
+                            <div class="leg-no">KE2006<br>大韩航空</div>
+                            <div>
+                                <div class="leg-route">香港 HKG · T1 → 首尔仁川 ICN · T2</div>
+                                <div><span class="leg-time">9/26 17:55 → 约 22:10–22:30</span></div>
+                                <div class="leg-meta">飞行约 4 小时 ｜ 香港 UTC+8 → 首尔 UTC+9（钟面 +1 小时）</div>
+                            </div>
+                        </div>
+                        <div class="layover-note">
+                            🌙 <strong>首尔仁川中转约 22 小时 35 分（需过夜）</strong>：9/26 约 22:30 落地 → 9/27 21:05 起飞。这是全程最需要提前安排的一段，两个选择：<br>
+                            <strong>① 留在机场（不入境）</strong>：ICN T2 有转机区酒店 / 休息室 / 淋浴，行李可直挂到 HNL 的话最省事。<br>
+                            <strong>② 入境首尔住一晚</strong>：机场周边（仁川/永宗岛）酒店车程约 10–20 分钟，比进首尔市区更省时间。<br>
+                            ⚠️ <strong>入境韩国涉及签证 / K-ETA，请务必自行向官方确认</strong>，不要按网上经验默认可以出关：<a href="https://www.k-eta.go.kr/" target="_blank" rel="noopener">K-ETA 官网 ↗</a> · <a href="https://www.visa.go.kr/" target="_blank" rel="noopener">韩国签证门户 ↗</a><br>
+                            同时请在值机时确认：<strong>行李能否从香港直挂檀香山</strong>，以及是否需要在仁川重新提取。
+                        </div>
+                        <div class="leg">
+                            <div class="leg-no">KE53<br>大韩航空</div>
+                            <div>
+                                <div class="leg-route">首尔仁川 ICN · T2 → 檀香山 HNL · T2</div>
+                                <div><span class="leg-time">9/27 21:05 → 9/27 10:55（HST）</span></div>
+                                <div class="leg-meta">飞行约 8 小时 50 分 ｜ 波音 787-10 ｜ 与达美 DL7939 共享代号</div>
+                                <div class="leg-warn">🌏 <strong>不是笔误：</strong>东行跨国际日界线会「倒回」一天，21:05 晚上从首尔起飞，落地檀香山仍是 <strong>9/27 上午 10:55</strong>，等于白捡半天行程。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="flight-section-title">🛫 B 组｜达拉斯出发</h3>
+                <div class="group-card">
+                    <div class="group-head group-b">B 组 · 9/27 07:00 出发 → 当日抵达 HNL</div>
+                    <div class="group-body">
+                        <div class="leg">
+                            <div class="leg-no">待确认</div>
+                            <div>
+                                <div class="leg-route">达拉斯 DFW → 檀香山 HNL · T2</div>
+                                <div><span class="leg-time">9/27 07:00（CDT）→ 约 12:30–14:30（HST）</span></div>
+                                <div class="leg-meta">达拉斯 9 月为夏令时 UTC−5，檀香山全年 UTC−10，<strong>钟面时差 5 小时</strong>（HNL 比 DFW 晚 5 小时）</div>
+                                <div class="leg-warn">⚠️ 07:00 起飞应为<strong>中转航班</strong>（DFW→HNL 直飞 AA5 约 11:20 起飞）。到达时间待你提供航班号后更新；国内航段<strong>无需入境检查</strong>，取到行李即可出到达层。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="flight-section-title">📋 航班总表</h3>
+                <div class="flight-table-wrap">
+                    <table class="flight-table">
+                        <thead>
+                            <tr><th>组</th><th>航班</th><th>航段</th><th>起飞（当地）</th><th>抵达（当地）</th><th>时长</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row-a"><td>A</td><td>9C8715</td><td>PVG T2 → HKG T1</td><td>9/26 09:15</td><td>9/26 12:20</td><td>3h05m</td></tr>
+                            <tr class="row-a"><td>A</td><td>KE2006</td><td>HKG T1 → ICN T2</td><td>9/26 17:55</td><td>9/26 约 22:10–22:30</td><td>约 4h</td></tr>
+                            <tr class="row-a"><td>A</td><td>KE53</td><td>ICN T2 → HNL T2</td><td>9/27 21:05</td><td><strong>9/27 10:55</strong></td><td>8h50m</td></tr>
+                            <tr class="row-b"><td>B</td><td>待确认</td><td>DFW → HNL T2</td><td>9/27 07:00</td><td>约 12:30–14:30</td><td>约 11h</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="flight-section-title">🤝 9/27 汇合计划</h3>
+                <div class="meet-grid">
+                    <div class="meet-card recommended">
+                        <h4>✅ 方案 1（推荐）：机场汇合，一起进城</h4>
+                        <p>适用于 B 组在 <strong>14:00 前</strong>落地。</p>
+                        <ul>
+                            <li><strong>10:55</strong> A 组 KE53 落地 T2</li>
+                            <li><strong>11:00–12:15</strong> A 组入境、取行李、过海关（国际到达留足 60–90 分钟）</li>
+                            <li><strong>12:30–14:00</strong> B 组落地 T2，取行李约 20–30 分钟</li>
+                            <li><strong>汇合点：</strong>T2 二层到达层，行李提取区出口外</li>
+                            <li>合并成 <strong>1 辆 Uber / Lyft XL</strong>（4 人 + 4 箱）直接去酒店，约 25–40 分钟</li>
+                        </ul>
+                    </div>
+                    <div class="meet-card">
+                        <h4>🅱️ 方案 2：酒店汇合</h4>
+                        <p>适用于 B 组晚于 <strong>14:30</strong> 落地，或 A 组不想在机场久等。</p>
+                        <ul>
+                            <li>A 组出关后自行前往酒店（Uber XL，或 TheBus 20 路 $3/人）</li>
+                            <li>先在 <strong>Romer House 前台寄存行李</strong>（标准入住 15:00）</li>
+                            <li>B 组落地后直接打车到酒店</li>
+                            <li><strong>汇合点：</strong>Romer House Waikīkī 前台，415 Nāhua St</li>
+                        </ul>
+                    </div>
+                    <div class="meet-card">
+                        <h4>📱 汇合前必做</h4>
+                        <ul>
+                            <li>提前建微信 / WhatsApp 群，落地立刻报「已落地 + 位置」</li>
+                            <li>确认落地后能上网：美国 eSIM 或开通国际漫游，<strong>别依赖机场 Wi-Fi 才联系</strong></li>
+                            <li>约定<strong>备用汇合点</strong>（酒店前台）以防手机没信号</li>
+                            <li>两组各自记住对方航班号，可在航司 App 里查实时到达</li>
+                            <li>HNL T2 到达在<strong>二层</strong>，接送车辆在到达层外侧 Ground Transportation 区</li>
+                        </ul>
+                    </div>
+                    <div class="meet-card">
+                        <h4>🚗 与租车方案的衔接</h4>
+                        <ul>
+                            <li><strong>9/27 不租车</strong>：省两晚酒店停车费（约 $55/天）+ 一天闲置租金</li>
+                            <li>抵达日用 Uber / Lyft XL 或 TheBus 进城</li>
+                            <li><strong>9/28 08:00–08:15</strong> 在 Waikīkī 门店取车，当天直接去 Hoʻomaluhia + 古兰尼</li>
+                            <li>9/30 晚上还车，10/1 飞大岛当天不需要欧胡岛的车</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="flight-section-title">🕐 时差对照</h3>
+                <div class="flight-table-wrap">
+                    <table class="flight-table">
+                        <thead>
+                            <tr><th>地点</th><th>时区（9 月）</th><th>比檀香山快</th><th>备注</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>上海 / 香港</td><td>UTC+8</td><td>+18 小时</td><td>无夏令时</td></tr>
+                            <tr><td>首尔</td><td>UTC+9</td><td>+19 小时</td><td>无夏令时</td></tr>
+                            <tr><td>达拉斯</td><td>UTC−5（CDT）</td><td>+5 小时</td><td>9 月仍是夏令时</td></tr>
+                            <tr><td>檀香山 / 大岛</td><td>UTC−10（HST）</td><td>—</td><td>全年不调夏令时</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="flight-section-title">✅ 出发前检查</h3>
+                <div class="meet-grid">
+                    <div class="meet-card">
+                        <h4>A 组</h4>
+                        <ul>
+                            <li>☐ 美国签证 + ESTA/签证状态有效</li>
+                            <li>☐ 韩国中转：签证 / K-ETA 是否需要（已向官方确认）</li>
+                            <li>☐ 仁川过夜方案已定（机场内或机场周边酒店）</li>
+                            <li>☐ 行李是否直挂 HNL（香港值机时问清）</li>
+                            <li>☐ 春秋航空行李额度（廉航额度低，超重另收费）</li>
+                            <li>☐ 香港转机预留 1 小时重新值机</li>
+                        </ul>
+                    </div>
+                    <div class="meet-card">
+                        <h4>B 组</h4>
+                        <ul>
+                            <li>☐ <strong>把航班号和中转机场发给规划表</strong></li>
+                            <li>☐ 中转衔接时间是否够（建议国内转机 ≥ 1 小时）</li>
+                            <li>☐ 托运行李件数（与 4 人 4 箱方案一致）</li>
+                            <li>☐ 落地后网络可用</li>
+                        </ul>
+                    </div>
+                    <div class="meet-card">
+                        <h4>两组共同</h4>
+                        <ul>
+                            <li>☐ 酒店预订确认号（Romer House Waikīkī）</li>
+                            <li>☐ 9/28 租车预订确认号 + 驾照 / 国际驾照翻译</li>
+                            <li>☐ 9/29 鲨潜确认单（4 人，已付 $509.43）</li>
+                            <li>☐ 10/1 欧胡岛 → 大岛的岛际航班（本页尚未收到信息）</li>
+                            <li>☐ 10/2 蝠鲼夜潜预订</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="flight-footer-note">A 组三段航班的时刻依据你提供的起飞时间，并用公开航班数据核对到达时间（9C8715 约 09:15→12:20；KE2006 约 4 小时；KE53 21:05→10:55 HST，787-10，与 DL7939 共享代号）。KE2006 到达时间存在约 15–20 分钟的版本差异，请以购票行程单为准。B 组到达时间为按 07:00 起飞的中转推算区间，<strong>尚未核实到具体航班号</strong>。所有时刻请在出发前 24 小时用航司 App 复查，航班时刻可能季节性调整。</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -646,13 +959,13 @@
     const oahuDays = [
         {
             date: '9/27 (Sun)',
-            title: 'D1 抵达 + Waikīkī',
+            title: 'D1 两组汇合 + Waikīkī',
             color: '#888888',
             stops: [
-                { name: 'HNL Airport', nameCn: '檀香山机场', desc: '10:55 抵达；入境、取行李预留 1–1.5 小时。当天不租车。', lat: 21.3187, lng: -157.9224, labelLat: 21.355, labelLng: -158.05 },
-                { name: 'Romer House Waikīkī', nameCn: '酒店', desc: '12:30 左右离开机场。<br><strong>🚍 公交：</strong>前往机场二层出发层道路中央隔离带，搭乘 TheBus 20 路（<em>Waikīkī Beach & Hotels</em> 方向），在 Kūhiō Ave + Seaside Ave 附近下车，再步行 5–8 分钟到 415 Nāhua St。约 70–95 分钟，$3/人；现金需备零钱，司机不找零。<a href="https://www.thebus.org/Route/Timetables/Rt20.pdf" target="_blank" rel="noopener">查看20路时刻表 ↗</a><br><strong>🧳 行李提醒：</strong>行李必须能放在腿上或座位下，不能占座或堵塞过道。4人＋4个大型行李箱建议改乘 Uber/Lyft XL（约 25–40 分钟）；继续保持 9/27 不租车、9/28 早上取车。抵达后办理入住、午餐和午休。', lat: 21.2807, lng: -157.8285, labelLat: 21.225, labelLng: -157.92 },
-                { name: 'Waikīkī Beach', nameCn: '威基基海滩', desc: '16:00 后步行至海滩，按体力随时折返。', lat: 21.2761, lng: -157.8270, labelLat: 21.18, labelLng: -157.86 },
-                { name: 'Kapiʻolani Park', nameCn: '卡皮欧拉尼公园', desc: '沿海步行至约 18:30；无需开车。', lat: 21.2671, lng: -157.8214, labelLat: 21.155, labelLng: -157.78 },
+                { name: 'HNL Airport', nameCn: '檀香山机场 T2 汇合', desc: '<strong>A 组</strong>：KE53 <strong>10:55</strong> 落地 T2 → 入境、取行李、海关约 11:00–12:15。<br><strong>B 组</strong>：9/27 07:00 从 DFW 出发，预计 <strong>12:30–14:30</strong> 落地 T2（⚠️ 航班号待确认，国内段无入境检查，取行李约 20–30 分钟）。<br><strong>汇合点：</strong>T2 <strong>二层到达层</strong>、行李提取区出口外；备用汇合点为酒店前台。<br>当天不租车，9/28 早上再取车。详见「✈️ 航班信息」tab。', lat: 21.3187, lng: -157.9224, labelLat: 21.355, labelLng: -158.05 },
+                { name: 'Romer House Waikīkī', nameCn: '酒店', desc: '两组汇合后一起出发（视 B 组落地时间，约 <strong>13:00–15:00</strong>）。<br><strong>🚗 首选：</strong>合并 1 辆 Uber / Lyft XL，4 人 + 4 箱，约 25–40 分钟直达。<br><strong>🏨 入住：</strong>标准入住 15:00；早到可先在前台寄存行李，先去吃饭。<br>若 B 组晚于 14:30 落地，A 组可先到酒店寄存行李，B 组落地后直接打车来汇合。<br><strong>🚍 公交备选：</strong>前往机场二层出发层道路中央隔离带，搭乘 TheBus 20 路（<em>Waikīkī Beach & Hotels</em> 方向），在 Kūhiō Ave + Seaside Ave 附近下车，再步行 5–8 分钟到 415 Nāhua St。约 70–95 分钟，$3/人；现金需备零钱，司机不找零。<a href="https://www.thebus.org/Route/Timetables/Rt20.pdf" target="_blank" rel="noopener">查看20路时刻表 ↗</a><br><strong>🧳 行李提醒：</strong>行李必须能放在腿上或座位下，不能占座或堵塞过道。4人＋4个大型行李箱建议改乘 Uber/Lyft XL（约 25–40 分钟）；继续保持 9/27 不租车、9/28 早上取车。抵达后办理入住、午餐和午休。', lat: 21.2807, lng: -157.8285, labelLat: 21.225, labelLng: -157.92 },
+                { name: 'Waikīkī Beach', nameCn: '威基基海滩', desc: '<strong>16:30</strong> 后步行至海滩，按体力随时折返。A 组已连续飞行约 43 小时，不要硬撑。', lat: 21.2761, lng: -157.8270, labelLat: 21.18, labelLng: -157.86 },
+                { name: 'Kapiʻolani Park', nameCn: '卡皮欧拉尼公园 + 日落🌅', desc: '沿海步行；<strong>18:21 海滩日落</strong>，之后就近晚餐，早睡倒时差。全程步行，无需开车。', lat: 21.2671, lng: -157.8214, labelLat: 21.155, labelLng: -157.78 },
             ]
         },
         {
@@ -662,7 +975,7 @@
             stops: [
                 { name: 'Waikīkī', nameCn: '取车', desc: '建议 08:00–08:15 在 Waikīkī 直营网点完成取车。', lat: 21.2807, lng: -157.8285, hidden: true },
                 { name: 'Hoʻomaluhia Garden', nameCn: '何欧马鲁希亚植物园', desc: '09:45–11:05：Visitor Center、湖区和山景停车点；周一可行。免费。', lat: 21.3371, lng: -157.8046, labelLat: 21.36, labelLng: -157.72, bookingUrl: 'https://www.honolulu.gov/dpr/honolulu-botanical-gardens/hoomaluhia-botanical-garden' },
-                { name: 'Kualoa Ranch', nameCn: '古兰尼牧场', desc: '11:35 签到；Novice E-Bike / Movie Sites Tour。', lat: 21.5180, lng: -157.8373, labelLat: 21.55, labelLng: -157.74, bookingUrl: 'https://booking.kualoa.com/en' },
+                { name: 'Kualoa Ranch', nameCn: '古兰尼牧场 E-bike 🚲', desc: '✅ 已预订：<strong>11:45 必须到场</strong>签到，<strong>12:30 开始 Novice E-bike</strong>（约 2 小时，至 14:30）。<br>从 Hoʻomaluhia 开车约 30–40 分钟，<strong>11:05 前务必离开植物园</strong>。<br>需通过骑行测试，穿包头包跟鞋、长度合适的裤子；带水和防晒。', lat: 21.5180, lng: -157.8373, labelLat: 21.55, labelLng: -157.74, bookingUrl: 'https://booking.kualoa.com/en' },
                 { name: 'Byodo-In Temple', nameCn: '平等院', desc: '15:05–16:05；若 E-bike 晚于 15:00 结束则跳过。', lat: 21.4571, lng: -157.8290, labelLat: 21.47, labelLng: -157.73, bookingUrl: 'https://tickets.byodo-in.com' },
                 { name: 'Kailua Beach', nameCn: '凯卢阿海滩', desc: '16:30–18:15 散步和早晚餐。', lat: 21.3948, lng: -157.7246, labelLat: 21.42, labelLng: -157.64 },
                 { name: 'Romer House Waikīkī', nameCn: '返回酒店', desc: '经 Pali Hwy 返回。', lat: 21.2807, lng: -157.8285, hidden: true },
@@ -673,14 +986,14 @@
             title: 'D3 鲨鱼笼潜 + 北岸环岛',
             color: '#e67e22',
             stops: [
-                { name: 'Waikīkī', nameCn: '出发', desc: '05:30 出发；唯一早起日。', lat: 21.2807, lng: -157.8285, hidden: true },
-                { name: 'Haleʻiwa Harbor', nameCn: '哈雷瓦港 🦈', desc: '06:30–07:00 签到；07:00–09:00 有笼鲨鱼潜水。', lat: 21.5952, lng: -158.1098, labelLat: 21.56, labelLng: -158.22, bookingUrl: 'https://sharktourshawaii.com/shark-diving-tour/' },
-                { name: 'Haleʻiwa', nameCn: '哈雷瓦早餐', desc: '09:10–10:00 补水、早餐。', lat: 21.5927, lng: -158.1047, hidden: true },
-                { name: 'Laniākea Beach', nameCn: '海龟沙滩 🐢', desc: '条件型短停：有合法车位才停。', lat: 21.6195, lng: -158.0858, labelLat: 21.685, labelLng: -158.17 },
-                { name: 'Waimea Valley', nameCn: '威美亚山谷', desc: '10:45–12:45：植物、瀑布步道。', lat: 21.6388, lng: -158.0595, labelLat: 21.665, labelLng: -157.99, bookingUrl: 'https://book.singenuity.com/813/catalog/activities' },
-                { name: 'Sunset Beach', nameCn: '日落海滩', desc: '13:00–13:25 观景短停。', lat: 21.6794, lng: -158.0422, labelLat: 21.745, labelLng: -158.05 },
-                { name: 'Kahuku', nameCn: '卡胡库虾饭 🍤', desc: '13:45–14:45 餐车区午餐。', lat: 21.6793, lng: -157.9533, labelLat: 21.72, labelLng: -157.88 },
-                { name: 'Waikīkī', nameCn: '返回酒店', desc: '经 Route 83、H-3 返回。', lat: 21.2807, lng: -157.8285, hidden: true },
+                { name: 'Waikīkī', nameCn: '出发', desc: '<strong>06:00–06:15 出发</strong>；Waikīkī 到 Haleʻiwa 运营商标注约 1.5 小时车程，务必留缓冲。唯一早起日。', lat: 21.2807, lng: -157.8285, hidden: true },
+                { name: 'Haleʻiwa Harbor', nameCn: '鲨鱼笼潜 🦈 已预订', desc: '✅ 已确认：<strong>9/29 (Tue) 8:30–10:00</strong>，4 位成人笼潜，已付 <strong>$509.43</strong>（$112/人 + 税费 $61.43）。<br><strong>⏰ 必须 8:00 前到场</strong>（提前 30 分钟签到），在 <strong>Shark Shack kiosk</strong> 办理：66-105 Haleiwa Rd, Haleiwa Small Boat Harbor, HI 96712｜☎ 808-228-5900。<br><strong>自带：</strong>毛巾、泳衣、换洗衣物、背包、水壶、零食、相机、防晒霜、帽子、墨镜。<br><strong>提供：</strong>面镜、呼吸管、免费停车、专业讲解。<br><strong>建议：</strong>提前服用防晕船药，穿拖鞋；<strong>严禁饮酒</strong>。约 10:15 上岸。', lat: 21.5952, lng: -158.1098, labelLat: 21.56, labelLng: -158.22, bookingUrl: 'https://sharktourshawaii.com/shark-diving-tour/' },
+                { name: 'Haleʻiwa', nameCn: '哈雷瓦早午餐', desc: '10:30–11:15 冲洗换衣、补水、早午餐。', lat: 21.5927, lng: -158.1047, hidden: true },
+                { name: 'Laniākea Beach', nameCn: '海龟沙滩 🐢', desc: '11:30–11:50 条件型短停：有合法车位才停，否则直接走。', lat: 21.6195, lng: -158.0858, labelLat: 21.685, labelLng: -158.17 },
+                { name: 'Waimea Valley', nameCn: '威美亚山谷', desc: '12:00–14:00：植物、瀑布步道。', lat: 21.6388, lng: -158.0595, labelLat: 21.665, labelLng: -157.99, bookingUrl: 'https://book.singenuity.com/813/catalog/activities' },
+                { name: 'Sunset Beach', nameCn: '日落海滩', desc: '14:15–14:35 观景短停。', lat: 21.6794, lng: -158.0422, labelLat: 21.745, labelLng: -158.05 },
+                { name: 'Kahuku', nameCn: '卡胡库虾饭 🍤', desc: '15:00–16:00 餐车区午餐（当天顺序：先鲨潜再吃）。', lat: 21.6793, lng: -157.9533, labelLat: 21.72, labelLng: -157.88 },
+                { name: 'Waikīkī', nameCn: '返回酒店', desc: '16:00 出发，经 Route 83、H-3 返回，约 17:30 抵达。', lat: 21.2807, lng: -157.8285, hidden: true },
             ]
         },
         {
@@ -816,7 +1129,7 @@
         `;
         oahuSection.after(briefing);
 
-        document.querySelector('.tips').innerHTML = `<h3>💡 执行要点</h3><ul style="padding-left:16px;"><li>D1 灰色 = 机场→Waikīkī（不租车）；D2 绿色 = 东岸（古兰尼方向）；D3 橙色 = 北岸环岛；D4 蓝色 = 东南海岸（恐龙湾方向）。</li><li>9/28 若 E-bike 晚于 15:00 结束，取消 Byodo-In，直接去 Kailua。</li><li>9/29 的 Laniākea 仅做合法停车位可用时的短停；不要为了海龟占道或久等。</li><li>9/30 Hanauma Bay 需 9/28 07:00 HST 抢票；Koko Crater 为可删项，以体力为准。</li><li>点击地图上任意景点标签，可弹出详情和预订链接。</li></ul>`;
+        document.querySelector('.tips').innerHTML = `<h3>💡 执行要点</h3><ul style="padding-left:16px;"><li>D1 灰色 = 机场→Waikīkī（不租车）；D2 绿色 = 东岸（古兰尼方向）；D3 橙色 = 北岸环岛；D4 蓝色 = 东南海岸（恐龙湾方向）。</li><li><strong>9/27 两组分别抵达</strong>：A 组 KE53 10:55 落地，B 组约 12:30–14:30 落地，在 HNL T2 二层到达层汇合，详见「✈️ 航班信息」tab。</li><li><strong>9/28 古兰尼已定档</strong>：11:45 到场、12:30 开始 E-bike（至约 14:30）；因此 11:05 前必须离开 Hoʻomaluhia。若 E-bike 晚于 15:00 结束，取消 Byodo-In，直接去 Kailua。</li><li><strong>9/29 鲨潜已定档</strong>：8:30–10:00，<strong>8:00 前到场</strong>，Waikīkī 06:00–06:15 出发（车程约 1.5 小时）。Laniākea 仅在有合法车位时短停。</li><li>9/30 Hanauma Bay 需 9/28 07:00 HST 抢票；当天下午 15:00 场钻石山，18:00 锁门。</li><li>点击地图上任意景点标签，可弹出详情和预订链接。</li></ul>`;
     });
 
     const bigIslandDays = [
@@ -1333,6 +1646,7 @@
         const bigIslandPage = document.getElementById('page-bigisland');
         const tipsOahu = document.getElementById('tips-oahu');
         const weatherPage = document.getElementById('page-weather');
+        const flightsPage = document.getElementById('page-flights');
         // Oahu briefing section is inserted after oahuPage dynamically
         function switchIsland(island) {
             tabBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.island === island));
@@ -1341,6 +1655,7 @@
             const showOahu = island === 'oahu';
             const showBigIsland = island === 'bigisland';
             const showWeather = island === 'weather';
+            const showFlights = island === 'flights';
 
             oahuPage.style.display = showOahu ? '' : 'none';
             if (oahuBriefing) oahuBriefing.style.display = showOahu ? '' : 'none';
@@ -1348,6 +1663,7 @@
             bigIslandPage.style.display = showBigIsland ? '' : 'none';
             if (bigIslandBriefing) bigIslandBriefing.style.display = showBigIsland ? '' : 'none';
             if (weatherPage) weatherPage.style.display = showWeather ? '' : 'none';
+            if (flightsPage) flightsPage.style.display = showFlights ? '' : 'none';
 
             if (showOahu) setTimeout(() => oahuMap.invalidateSize(), 100);
             if (showBigIsland) setTimeout(() => bigIslandMap.invalidateSize(), 100);
