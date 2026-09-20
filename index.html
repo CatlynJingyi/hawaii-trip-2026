@@ -367,6 +367,40 @@
         }
         .weather-link-card a { color: #0369a1; font-weight: 650; }
         .weather-footer-note { margin-top: 18px; color: #64748b; font-size: 11px; line-height: 1.55; }
+        .packing-figure {
+            margin: 6px 0 4px;
+            padding: 14px;
+            border: 1px solid #d1fae5;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+            text-align: center;
+        }
+        .packing-figure img {
+            width: 100%;
+            max-width: 1024px;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .packing-figure figcaption {
+            margin-top: 10px;
+            color: #475569;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .packing-figure .img-fallback {
+            display: none;
+            padding: 24px;
+            color: #b45309;
+            background: #fffbeb;
+            border: 1px dashed #fbbf24;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .packing-figure img[data-broken="1"] + .img-fallback { display: block; }
 
         @media (max-width: 768px) {
             .island-tabs { gap: 5px; }
@@ -439,13 +473,15 @@
             </div>
             <div class="weather-content">
                 <div class="weather-notice">
-                    <strong>⚠️ 目前是季节趋势版，不是精确逐日预报。</strong><br>
-                    超过10天的天气无法可靠预测。建议在 <strong>9/20左右</strong> 更新第一版逐日预报；浮潜、出海、火山和观星活动前 <strong>24–48小时</strong> 再确认小时天气、风浪和官方警报。
+                    <strong>✅ 已于 9/20 更新（距出发约 1 周）——现在进入可参考的中期预报窗口。</strong><br>
+                    最新趋势（据 NWS Honolulu / AccuWeather 9 月中旬预报）：Honolulu 白天 <strong>29–32°C</strong>、夜间 24–25°C，ENE/NE 信风 10–20 mph；Kona 侧 10 月白天回落到 <strong>26–28°C</strong>、夜间 20–22°C，干燥晴朗。<br>
+                    ⚠️ <strong>仍在中太平洋飓风季（至 11/30）</strong>：2026 官方展望 5–13 个热带气旋，高于常年，出发前请持续关注 NWS 警报。浮潜、出海、火山和观星活动前 <strong>24–48 小时</strong> 再确认小时天气、风浪和官方通告。
                 </div>
 
                 <div class="weather-summary-grid">
-                    <div class="weather-summary"><strong>🏖️ 海边白天</strong><br>约 28–31°C，日晒强、体感偏湿；海水约 26–27°C。</div>
-                    <div class="weather-summary"><strong>🌧️ 迎风面 / Hilo</strong><br>短阵雨较常见，通常来得快、去得快；轻量防水外套比雨伞实用。</div>
+                    <div class="weather-summary"><strong>🏖️ Oʻahu 海边白天</strong><br>约 29–32°C，日晒强、体感偏湿；夜间 24–25°C，海水约 26–27°C。</div>
+                    <div class="weather-summary"><strong>🌤️ Kona 背风面</strong><br>10 月白天约 26–28°C、干燥晴朗；夜间 20–22°C，是全程最稳定的晴天区。</div>
+                    <div class="weather-summary"><strong>🌧️ 迎风面 / Hilo</strong><br>短阵雨常见、多在夜间，来得快去得快；轻量防水外套比雨伞实用。</div>
                     <div class="weather-summary"><strong>🌋 火山公园</strong><br>约 14–23°C，晴、雾、阵雨和强风可能在同一天快速切换。</div>
                     <div class="weather-summary"><strong>⭐ Maunakea VIS</strong><br>日落后约 4–10°C；强风时体感可能接近 0°C，必须准备冬季保暖层。</div>
                 </div>
@@ -455,7 +491,7 @@
                     <article class="weather-day-card">
                         <div class="weather-day-head">9/27 · Waikīkī 抵达日</div>
                         <div class="weather-day-body">
-                            <p>🌤️ <span class="weather-temp">25–31°C</span>；晴到多云，午后可能有短阵雨，海边日晒明显。</p>
+                            <p>🌤️ <span class="weather-temp">25–32°C</span>；晴到多云，ENE 信风，午后可能有短阵雨，海边日晒明显。</p>
                             <p>👕 短袖、短裤或薄裙、凉鞋；飞机和室内冷气环境可穿薄长裤，随身带薄防晒外套。</p>
                         </div>
                     </article>
@@ -469,7 +505,7 @@
                     <article class="weather-day-card">
                         <div class="weather-day-head">9/29 · 鲨鱼笼潜＋北岸环岛</div>
                         <div class="weather-day-body">
-                            <p>🌊 <span class="weather-temp">24–30°C</span>；清晨船上风大，体感约 21–24°C；9月底北岸可能开始出现涌浪。</p>
+                            <p>🌊 <span class="weather-temp">25–31°C</span>；清晨船上风大，体感约 22–24°C；9月底北岸可能开始出现涌浪。</p>
                             <p>👕 提前穿泳衣，外搭速干衣；带防风外套、毛巾和全套干衣。易晕船者按说明提前服用防晕药。</p>
                         </div>
                     </article>
@@ -494,7 +530,7 @@
                     <article class="weather-day-card">
                         <div class="weather-day-head">10/1 · KOA → Kahaluʻu → Aliʻi Drive</div>
                         <div class="weather-day-body">
-                            <p>☀️ <span class="weather-temp">25–31°C</span>；Kona背风面通常晴到多云，午后山侧可能积云，海水约26–27°C。</p>
+                            <p>☀️ <span class="weather-temp">26–30°C</span>；Kona背风面 10 月转干爽晴朗，午后山侧可能积云，海水约26–27°C。</p>
                             <p>👕 泳衣、速干衣、UPF水母衣和涉水鞋；日落后换干衣，薄外套通常足够。</p>
                         </div>
                     </article>
@@ -536,6 +572,19 @@
                 </div>
 
                 <h3 class="weather-section-title">🧳 穿衣组合 & 打包清单</h3>
+
+                <figure class="packing-figure">
+                    <img src="images/4abcbed70006df47de53407d306c9295.png"
+                         alt="夏威夷10天·四人行·行李系统图：随身包、托运行李、4人共享车载活动包，以及水上/Maunakea/火山公园三个可拆卸活动模块"
+                         onerror="this.setAttribute('data-broken','1')">
+                    <div class="img-fallback">
+                        📷 行李系统图未找到。请把图片保存为
+                        <strong>images/hawaii-luggage-system.png</strong>
+                        （与本 HTML 同目录下的 images 文件夹）。
+                    </div>
+                    <figcaption>🧳 <strong>夏威夷 10 天 · 四人行 · 行李系统</strong>：① 随身包（护照/证件/药品/电子设备/充电宝——只随身不托运）· ② 托运行李（衣物、徒步鞋、洗漱、外套）· ③ 4 人共享车载活动包 + 水上 / Maunakea / 火山公园三个可拆卸模块。⚠️ 火山公园活动人员不能带二氧化硫气体敏感人群风险，备 N95。</figcaption>
+                </figure>
+
                 <div class="packing-grid">
                     <div class="packing-card">
                         <h4>🏊 海滩 / 浮潜日</h4>
@@ -574,7 +623,7 @@
                     <div class="weather-link-card"><a href="https://mkwc.ifa.hawaii.edu/" target="_blank" rel="noopener">Maunakea Weather Center ↗</a><br>查看高海拔云层、气温、风速和观测条件。</div>
                 </div>
 
-                <p class="weather-footer-note">温度区间为夏威夷9月底至10月初常见趋势，并结合本行程不同海拔与迎风/背风位置整理；不代表对2026年每一天的确定预报。海洋和高海拔天气变化快，请始终以当天官方信息及活动运营商通知为准。</p>
+                <p class="weather-footer-note">本页温度已于 <strong>9/20</strong> 结合 NWS Honolulu、AccuWeather 等 9 月中旬中期预报更新，并按本行程不同海拔与迎风/背风位置整理；仍不代表对 2026 年每一天的确定预报。海洋和高海拔天气变化快，且当前仍处中太平洋飓风季，请在出发前 24–48 小时以当天官方信息及活动运营商通知为准。</p>
             </div>
         </div>
     </div>
